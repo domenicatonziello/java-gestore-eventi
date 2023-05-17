@@ -7,18 +7,44 @@ import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 import org.java.events.Concert;
+import org.java.events.Event;
+import org.java.events.ProgrammEvent;
 
 public class Main {
 	public static void main(String[] args) {
 		
+//		BONUS
 		
-//		try {
-//			Concert concerto = new Concert("concerto1", LocalDate.of(2023, 5, 18), 100, LocalTime.of(12,20), BigDecimal.valueOf(34.28));
-//			System.out.println("Concerto: " + concerto.toString());
-//			System.out.println("- - - - - - - - - - - ");
-//		} catch (Exception e) {
-//			System.err.println("Errore nella creazione del concerto: " + e.getMessage());
-//		}
+		Event evento1 = null;
+		try {
+			evento1 = new Event("evento1", LocalDate.of(2023,05,20), 400);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		Event evento2 = null;
+		try {
+			evento2 = new Event("evento2", LocalDate.of(2023, 10, 20), 50);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		Event evento3 = null;
+		try {
+			evento3 = new Event("evento3", LocalDate.of(2023, 10, 20), 150);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		ProgrammEvent programma  = new ProgrammEvent("Programma ottobre");
+		programma.aggiungiEvento(evento1);
+		programma.aggiungiEvento(evento2);
+		programma.aggiungiEvento(evento3);
+		
+		System.out.println(programma.toString());
+		int size = programma.getNumeroEventi();
+		System.out.println("Numero Eventi: " + size);
+		
+		
+		
+//		parte 1
 	
 		System.out.println("Inserisci un nuovo evento.");
 		Scanner sc = new Scanner(System.in);
@@ -101,6 +127,7 @@ public class Main {
 		
 		
 		sc.close();
+
 		
 	}
 	
