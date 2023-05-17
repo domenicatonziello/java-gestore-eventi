@@ -9,30 +9,6 @@ import org.java.events.Event;
 public class Main {
 	public static void main(String[] args) {
 	
-//		try {
-//			Event evento = new Event("Concerto", LocalDate.of(2023, 5, 18), 100);
-//			System.out.println("Evento creato con successo: " + evento.toString());
-//			System.out.println("-------------------------------------------------");
-//			
-//			
-//			try {
-//				evento.prenotaTavolo(LocalDate.of(2023, 05, 20), 3);	
-//				System.out.println("Prenotazione effettuata: " + evento.toString());
-//			} catch(Exception e) {
-//				System.out.println("Si è verificato un errore durante la prenotazione: " + e.getMessage());
-//			}
-//			
-//			try {
-//				evento.disdiciTavolo(LocalDate.of(2023, 05, 20));	
-//				System.out.println("Prenotazione effettuata: " + evento.toString());
-//			} catch(Exception e) {
-//				System.out.println("Si è verificato un errore durante la disdetta: " + e.getMessage());
-//			}
-//			
-//			
-//		} catch (Exception e) {
-//			System.out.println("Si è verificato un errore durante la creazione dell'evento: " + e.getMessage());
-//		}
 		System.out.println("Inserisci un nuovo evento.");
 		Scanner sc = new Scanner(System.in);
 		
@@ -41,14 +17,13 @@ public class Main {
 		
 		System.out.println("Inserisci la data dell'evento");
 		String data = sc.next();
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-		LocalDate formattedDate = LocalDate.parse(data, formatter);
+		LocalDate formatted = formatDate(data);
 		
 		System.out.println("Inserisci il numero dei posti dell'evento");
 		int posti = sc.nextInt();
 		
 		try {
-			Event evento = new Event(titolo, formattedDate, posti);
+			Event evento = new Event(titolo, formatted, posti);
 			System.out.println("Evento creato con successo: " + evento.toString());
 			System.out.println("-------------------------------------------------");
 			
@@ -64,8 +39,8 @@ public class Main {
 				if(userChoise == 1) {
 					System.out.println("Digita la data dell'evento a cui vuoi partecipare");
 					String userData = sc.next();
-					DateTimeFormatter dataformat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-					LocalDate dataPrenotazione = LocalDate.parse(userData, dataformat);
+					LocalDate dataPrenotazione = formatDate(userData);
+					
 					
 					System.out.println("Quanti posti vuoi prenotare?");
 					int postiPrenotati = sc.nextInt();
@@ -81,8 +56,7 @@ public class Main {
 					
 					System.out.println("Digita la data dell'evento a cui vuoi disdire");
 					String userData = sc.next();
-					DateTimeFormatter dataformat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-					LocalDate dataPrenotazione = LocalDate.parse(userData, dataformat);
+					LocalDate dataPrenotazione = formatDate(userData);
 					
 					System.out.println("Quanti posti vuoi disdire?");
 					int postiPrenotati = sc.nextInt();
@@ -110,6 +84,13 @@ public class Main {
 		
 		sc.close();
 		
+	}
+	
+	public static LocalDate formatDate(String date) {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		LocalDate formattedDate = LocalDate.parse(date, formatter);
+		
+		return formattedDate;
 	}
 
 }
