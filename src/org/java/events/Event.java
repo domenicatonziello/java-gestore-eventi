@@ -86,7 +86,7 @@ public class Event {
 		
 	}
 	
-	public void disdiciTavolo (LocalDate dataEvento) throws Exception {
+	public void disdiciTavolo (LocalDate dataEvento, int posti) throws Exception {
 		LocalDate today = LocalDate.now();
 		if(dataEvento.isBefore(today)) {
 			throw new Exception ("L'evento è già passato");
@@ -96,7 +96,7 @@ public class Event {
 			throw new Exception ("Non ci sono prenotazioni, non è possibile disdire");
 		}
 		setData(dataEvento);
-		this.numeroPrenotati -= 1;
+		this.numeroPrenotati -= posti;
 		postiDisponibili();
 	}
 	
