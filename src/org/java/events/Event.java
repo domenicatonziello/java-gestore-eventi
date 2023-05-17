@@ -38,9 +38,7 @@ public class Event {
 		if(data.isBefore(nowDate)) {			
 			throw new Exception("La data è precedente alla data attuale");
 		} 
-		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-		String formattedDate = data.format(dateTimeFormatter); 
-		this.data = formattedDate;
+		this.data = formatDate(data);
 		
 	}
 	public int getNumeroPosti() {
@@ -95,9 +93,21 @@ public class Event {
 		if(getNumeroPrenotati() <= 0 ) {
 			throw new Exception ("Non ci sono prenotazioni, non è possibile disdire");
 		}
+		
+		if (posti > getNumeroPrenotati()) {
+            throw new Exception("Non è possibile disdire");
+        }
+		
 		setData(dataEvento);
 		this.numeroPrenotati -= posti;
 		postiDisponibili();
+	}
+	
+	public String formatDate(LocalDate data) {
+		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		String formattedDate = data.format(dateTimeFormatter); 
+		return formattedDate;
+		
 	}
 	
 	@Override
